@@ -2,6 +2,9 @@
 {
     public interface IItemService
     {
+        /// <summary>
+        /// Update Items properties
+        /// </summary>
         void UpdateItems();
     }
 }

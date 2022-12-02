@@ -1,14 +1,14 @@
 ﻿using GildedRose.Console.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GildedRose.Console.Data
 {
     public static class ItemData
     {
+        /// <summary>
+        /// Get Item Data
+        /// </summary>
+        /// <returns>Item List</returns>
         public static List<Item> GetItems()
         {
             return new List<Item>

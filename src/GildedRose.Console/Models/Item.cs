@@ -9,9 +9,6 @@ namespace GildedRose.Console.Models
         private const int MAX_QUALITY = 50;
         private const int MIN_QUALITY = 0;
         private const decimal PRICE_FACTOR = 1.9M;
-
-
-
         #endregion
 
         public string Name { get; set; }
