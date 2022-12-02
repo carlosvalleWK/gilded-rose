@@ -7,15 +7,18 @@ namespace GildedRose.Console.Services
     {
         public IList<Item> Items;
 
+        /// <summary>
+        /// Item service constructor
+        /// </summary>
         public ItemService()
         {
 
         }
 
         /// <summary>
-        /// Update Items Quality and SellIn
+        /// Update Items properties
         /// </summary>
-        public void UpdateQuality()
+        public void UpdateItems()
         {
             foreach (var item in Items)
             {
@@ -34,7 +37,6 @@ namespace GildedRose.Console.Services
 
                 item.RecalculatePrice();
             }
-
         }
 
     }

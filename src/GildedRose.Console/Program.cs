@@ -19,7 +19,7 @@ namespace GildedRose.Console
                 Items = ItemData.GetItems()
             };
 
-            _itemService.UpdateQuality();
+            _itemService.UpdateItems();
 
             System.Console.ReadKey();
         }

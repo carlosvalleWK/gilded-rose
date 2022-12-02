@@ -32,7 +32,7 @@ namespace GildedRose.Console.Tests
             _sut.Items = new List<Item>() { item };
 
             //Act
-            _sut.UpdateQuality();
+            _sut.UpdateItems();
 
             //Assert
             Assert.Equal(baseSellIn - 1, _sut.Items[0].SellIn);
@@ -55,7 +55,7 @@ namespace GildedRose.Console.Tests
             _sut.Items = new List<Item>() { item };
 
             //Act
-            _sut.UpdateQuality();
+            _sut.UpdateItems();
 
             //Assert
             Assert.Equal(baseQuality - 1, _sut.Items[0].SellIn);
@@ -77,7 +77,7 @@ namespace GildedRose.Console.Tests
             _sut.Items = new List<Item>() { item };
 
             //Act
-            _sut.UpdateQuality();
+            _sut.UpdateItems();
 
             //Assert
 
@@ -99,7 +99,7 @@ namespace GildedRose.Console.Tests
             _sut.Items = new List<Item>() { item };
 
             //Act
-            _sut.UpdateQuality();
+            _sut.UpdateItems();
 
             //Assert
             Assert.Equal(baseQuality - 2, _sut.Items[0].SellIn);
@@ -118,7 +118,7 @@ namespace GildedRose.Console.Tests
             _sut.Items = new List<Item>() { item };
 
             //Act
-            _sut.UpdateQuality();
+            _sut.UpdateItems();
 
             //Assert
             Assert.Equal(baseQuality , _sut.Items[0].Quality);
@@ -138,7 +138,7 @@ namespace GildedRose.Console.Tests
             _sut.Items = new List<Item>() { item };
 
             //Act
-            _sut.UpdateQuality();
+            _sut.UpdateItems();
 
             //Assert
             Assert.Equal(baseQuality + 1 , _sut.Items[0].Quality);
@@ -158,7 +158,7 @@ namespace GildedRose.Console.Tests
             _sut.Items = new List<Item>() { item };
 
             //Act
-            _sut.UpdateQuality();
+            _sut.UpdateItems();
 
             //Assert
             Assert.Equal(baseQuality, _sut.Items[0].Quality);
@@ -179,7 +179,7 @@ namespace GildedRose.Console.Tests
             _sut.Items = new List<Item>() { item };
 
             //Act
-            _sut.UpdateQuality();
+            _sut.UpdateItems();
 
             //Assert
             Assert.Equal(baseQuality - 2, _sut.Items[0].Quality);
@@ -201,7 +201,7 @@ namespace GildedRose.Console.Tests
             _sut.Items = new List<Item>() { item };
 
             //Act
-            _sut.UpdateQuality();
+            _sut.UpdateItems();
 
             //Assert
             Assert.Equal(baseQuality + 2, _sut.Items[0].Quality);

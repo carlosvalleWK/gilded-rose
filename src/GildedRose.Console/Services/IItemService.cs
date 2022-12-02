@@ -2,6 +2,6 @@
 {
     public interface IItemService
     {
-        void UpdateQuality();
+        void UpdateItems();
     }
 }

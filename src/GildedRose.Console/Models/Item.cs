@@ -4,7 +4,15 @@ namespace GildedRose.Console.Models
 {
     public class Item
     {
+        #region Private constants
         private const string AGED_BRIE = "Aged Brie";
+        private const int MAX_QUALITY = 50;
+        private const int MIN_QUALITY = 0;
+        private const decimal PRICE_FACTOR = 1.9M;
+
+
+
+        #endregion
 
         public string Name { get; set; }
         public int SellIn { get; set; }
@@ -16,7 +24,7 @@ namespace GildedRose.Console.Models
         /// <summary>
         /// Recalculate price
         /// </summary>
-        public void RecalculatePrice() => Price = Math.Round(Quality * 1.9M, 2);
+        public void RecalculatePrice() => Price = Math.Round(Quality * PRICE_FACTOR, 2);
 
         /// <summary>
         /// Check if item name is "Aged Brie"
@@ -40,9 +48,9 @@ namespace GildedRose.Console.Models
         /// </summary>
         public void IncreaseQuality()
         {
-            if (Quality < 50)
+            if (Quality < MAX_QUALITY)
             {
-                Quality = IsSellInNegative() && Quality <= 50 - 2 ? Quality + 2 : Quality + 1;
+                Quality = IsSellInNegative() && Quality <= (MAX_QUALITY - 2) ? Quality + 2 : Quality + 1;
             }
         }
 
@@ -51,9 +59,9 @@ namespace GildedRose.Console.Models
         /// </summary>
         public void DecreaseQuality()
         {
-            if (Quality > 0)
+            if (Quality > MIN_QUALITY)
             {
-                Quality = IsSellInNegative() && Quality >= 2 ? Quality - 2 : Quality - 1;
+                Quality = IsSellInNegative() && Quality >= (MIN_QUALITY + 2) ? Quality - 2 : Quality - 1;
             }
         }
 
