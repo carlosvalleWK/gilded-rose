@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GildedRose.API", "GildedRose.API.csproj", "{C22A95A4-73D1-4C05-8E3A-B328BF130E89}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C22A95A4-73D1-4C05-8E3A-B328BF130E89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C22A95A4-73D1-4C05-8E3A-B328BF130E89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C22A95A4-73D1-4C05-8E3A-B328BF130E89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C22A95A4-73D1-4C05-8E3A-B328BF130E89}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5C78E649-8037-4B0E-B0CD-338506ABDF8F}
+	EndGlobalSection
+EndGlobal
