@@ -17,7 +17,7 @@ namespace GildedRose.Model.Model
             Name = name;
             Quality = quality;
             AgesGood = agesGood;
-            Discarted = false;
+            Expired = false;
             SellIn = sellIn;
             Price = Math.Round(Quality * 1.9M, 2);
         }
@@ -28,7 +28,7 @@ namespace GildedRose.Model.Model
         public int Quality { get; private set; }
         public decimal Price { get; private set; }
         public bool AgesGood { get; private init; }
-        public bool Discarted { get; private set; }
+        public bool Expired { get; private set; }
 
         //Se actualiza el número de días de vida
         private void UpdateSellIn(int sellInVariation)
@@ -39,7 +39,7 @@ namespace GildedRose.Model.Model
                 SellIn = 0;
 
             if (SellIn == 0)
-                Discarted = true;
+                Expired = true;
         }
 
         //Se actualiza la calidad
@@ -54,6 +54,8 @@ namespace GildedRose.Model.Model
             }
             else
             {
+                if (Expired)
+                    qualityVariation *= 2;
                 if(Quality- qualityVariation >= 0)
                     Quality -= qualityVariation;
                 else
@@ -64,7 +66,7 @@ namespace GildedRose.Model.Model
 
         private void UpdatePrice(decimal qualityPriceFactor)
         {
-            this.Price = Math.Round(Quality * 1.9M, 2);
+            this.Price = Math.Round(Quality * qualityPriceFactor, 2);
         }
 
         public void UpdateProduct(int sellInVariation, int qualityVariation, decimal qualityPriceFactor)
