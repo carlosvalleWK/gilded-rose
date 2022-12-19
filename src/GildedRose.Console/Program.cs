@@ -1,80 +1,37 @@
-﻿using System;
+﻿using GildedRose.Console.Entities;
+using GildedRose.Console.Repository;
+using GildedRose.Console.Services;
+using GildedRose.Console.Services.Application;
+using GildedRose.Console.Services.Console;
+using GildedRose.Console.Services.Quality;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.InteropServices;
 
 namespace GildedRose.Console
 {
     public class Program
     {
-        public IList<Item> Items;
+        public IConfigurationRoot Configuration { get; }
+
         static void Main(string[] args)
         {
-            System.Console.WriteLine("OMGHAI!");
-
-            var app = new Program()
+            var host = Host.CreateDefaultBuilder().ConfigureServices(services =>
             {
-                Items = new List<Item>
-                {
-                    new Item {Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20},
-                    new Item {Name = "Aged Brie", SellIn = 2, Quality = 0},
-                    new Item {Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7}
-                }
-            };
+                services.AddSingleton<IApplication, Application>();
+                services.AddSingleton<IConsoleService, ConsoleService>();
+                services.AddTransient<IProductService, ProductService>();
+                services.AddTransient<IProductRepository, ProductRepository>();
+                services.AddTransient<IQualityService, QualityService>();
+                services.AddTransient<IOldQualityService, OldQualityService>();
+            }).Build();
 
-            app.UpdateQuality();
-
-            System.Console.ReadKey();
-
+            var app = host.Services.GetRequiredService<IApplication>();
+            app.Run();
         }
-
-        public void UpdateQuality()
-        {
-            for (var i = 0; i < Items.Count; i++)
-            {
-                if (Items[i].Name != "Aged Brie")
-                {
-                    if (Items[i].Quality > 0)
-                    {
-                        Items[i].Quality = Items[i].Quality - 1;
-                    }
-                }
-                else
-                {
-                    if (Items[i].Quality < 50)
-                    {
-                        Items[i].Quality = Items[i].Quality + 1;
-                    }
-                }
-
-                Items[i].SellIn = Items[i].SellIn - 1;
-
-                if (Items[i].SellIn < 0)
-                {
-                    if (Items[i].Name != "Aged Brie")
-                    {
-
-                        if (Items[i].Quality > 0)
-                        {
-                            Items[i].Quality = Items[i].Quality - 1;
-                        }
-                    }
-                    else
-                    {
-                        if (Items[i].Quality < 50)
-                        {
-                            Items[i].Quality = Items[i].Quality + 1;
-                        }
-                    }
-                }
-                Items[i].Price = Math.Round(Items[i].Quality * 1.9M, 2);
-            }
-        }
-    }
-
-    public class Item
-    {
-        public string Name { get; set; }
-        public int SellIn { get; set; }
-        public int Quality { get; set; }
-        public decimal Price { get; set; }
     }
 }
