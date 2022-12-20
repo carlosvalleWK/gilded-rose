@@ -1,12 +1,13 @@
-﻿using System;
+﻿using GildedRose.Console.Services;
+using System;
 using System.Collections.Generic;
 
 namespace GildedRose.Console
 {
     public class Program
     {
-        private const decimal PRICE_CALCULATE_CONTS = 1.9M;
-
+        private const decimal PriceCalculateConst = 1.9M;
+        private const string AgedBrieItemName = "Aged Brie";
         public IList<Item> Items;
         static void Main(string[] args)
         {
@@ -30,50 +31,36 @@ namespace GildedRose.Console
 
         public void UpdateQuality()
         {
-            for (var i = 0; i < Items.Count; i++)
+            foreach (var item in Items)
             {
-                if (Items[i].Name != "Aged Brie")
-                {
-                    if (Items[i].Quality > 0)
-                    {
-                        Items[i].Quality = Items[i].Quality - 1;
-                    }
-                }
-                else
-                {
-                    if (Items[i].Quality < 50)
-                    {
-                        Items[i].Quality = Items[i].Quality + 1;
-                    }
-                }
+                var qualityCalculateStrategy = GetQualityCalculateStrategy(item);
 
-                Items[i].SellIn = Items[i].SellIn - 1;
+                item.Quality = qualityCalculateStrategy.CalculateNewQuality(item.Quality);
 
-                if (Items[i].SellIn < 0)
+                item.SellIn--;
+
+                if (item.SellIn < 0)
                 {
-                    if (Items[i].Name != "Aged Brie")
-                    {
-
-                        if (Items[i].Quality > 0)
-                        {
-                            Items[i].Quality = Items[i].Quality - 1;
-                        }
-                    }
-                    else
-                    {
-                        if (Items[i].Quality < 50)
-                        {
-                            Items[i].Quality = Items[i].Quality + 1;
-                        }
-                    }
+                    item.Quality = qualityCalculateStrategy.CalculateNewQuality(item.Quality);
                 }
-                Items[i].Price = CalulatePrice(Items[i].Quality);
+                item.Price = CalulatePrice(item.Quality);
             }
+        }
+
+        private static IQualityCalculateStrategy GetQualityCalculateStrategy(Item item)
+        {
+            IQualityCalculateStrategy qualityCalculateStrategy = new QualityDegradeStrategy();
+            if (item.Name == AgedBrieItemName)
+            {
+                qualityCalculateStrategy = new QualityIncreaseStrategy();
+            }
+
+            return qualityCalculateStrategy;
         }
 
         public decimal CalulatePrice(int quality)
         {
-            return Math.Round(quality * PRICE_CALCULATE_CONTS, 2);
+            return Math.Round(quality * PriceCalculateConst, 2);
         }
     }
 
