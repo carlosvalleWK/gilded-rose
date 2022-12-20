@@ -46,9 +46,9 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\IQualityCalculateStrategy.cs" />
-    <Compile Include="Services\QualityDegradeStrategy.cs" />
-    <Compile Include="Services\QualityIncreaseStrategy.cs" />
+    <Compile Include="QualityUpdateStrategy\IQualityUpdateStrategy.cs" />
+    <Compile Include="QualityUpdateStrategy\QualityDegradeStrategy.cs" />
+    <Compile Include="QualityUpdateStrategy\QualityIncreaseStrategy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

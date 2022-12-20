@@ -1,4 +1,4 @@
-﻿using GildedRose.Console.Services;
+﻿using GildedRose.Console.QualityUpdateStrategy;
 using System;
 using System.Collections.Generic;
 
@@ -33,23 +33,18 @@ namespace GildedRose.Console
         {
             foreach (var item in Items)
             {
-                var qualityCalculateStrategy = GetQualityCalculateStrategy(item);
-
-                item.Quality = qualityCalculateStrategy.CalculateNewQuality(item.Quality);
-
                 item.SellIn--;
 
-                if (item.SellIn < 0)
-                {
-                    item.Quality = qualityCalculateStrategy.CalculateNewQuality(item.Quality);
-                }
+                var qualityUpdateStrategy = GetQualityUpdateStrategy(item);
+                qualityUpdateStrategy.UpdateQuality(item);
+
                 item.Price = CalulatePrice(item.Quality);
             }
         }
 
-        private static IQualityCalculateStrategy GetQualityCalculateStrategy(Item item)
+        private static IQualityUpdateStrategy GetQualityUpdateStrategy(Item item)
         {
-            IQualityCalculateStrategy qualityCalculateStrategy = new QualityDegradeStrategy();
+            IQualityUpdateStrategy qualityCalculateStrategy = new QualityDegradeStrategy();
             if (item.Name == AgedBrieItemName)
             {
                 qualityCalculateStrategy = new QualityIncreaseStrategy();
