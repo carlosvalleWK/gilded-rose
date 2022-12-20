@@ -5,6 +5,8 @@ namespace GildedRose.Console
 {
     public class Program
     {
+        private const decimal PRICE_CALCULATE_CONTS = 1.9M;
+
         public IList<Item> Items;
         static void Main(string[] args)
         {
@@ -65,8 +67,13 @@ namespace GildedRose.Console
                         }
                     }
                 }
-                Items[i].Price = Math.Round(Items[i].Quality * 1.9M, 2);
+                Items[i].Price = CalulatePrice(Items[i].Quality);
             }
+        }
+
+        public decimal CalulatePrice(int quality)
+        {
+            return Math.Round(quality * PRICE_CALCULATE_CONTS, 2);
         }
     }
 

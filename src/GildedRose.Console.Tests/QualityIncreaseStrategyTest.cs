@@ -1,0 +1,104 @@
+﻿
+namespace GildedRose.Console.Tests
+{
+    public class QualityIncreaseStrategyTest
+    {
+        private readonly Program _program = new();
+        private const string AGED_BRIE_NAME = "Aged Brie";
+        [Fact]
+        public void QualityIncreaseTest()
+        {
+            //arrange
+            int sellIn = 10;
+            int quality = 49;
+            var testItem = new Item
+            {
+                Name = AGED_BRIE_NAME,
+                SellIn = sellIn,
+                Quality = quality
+            };
+
+            _program.Items = new List<Item>() { testItem };
+
+            //act
+            _program.UpdateQuality();
+
+            //assert
+            Assert.Equal(sellIn - 1, testItem.SellIn);
+            Assert.Equal(quality + 1, testItem.Quality);
+            Assert.Equal(_program.CalulatePrice(quality + 1), testItem.Price);
+        }
+
+        [Fact]
+        public void ZeroQualityIncreaseTest()
+        {
+            //arrange
+            int sellIn = 10;
+            int quality = 0;
+            var testItem = new Item
+            {
+                Name = AGED_BRIE_NAME,
+                SellIn = sellIn,
+                Quality = quality
+            };
+
+            _program.Items = new List<Item>() { testItem };
+
+            //act
+            _program.UpdateQuality();
+
+            //assert
+            Assert.Equal(sellIn - 1, testItem.SellIn);
+            Assert.Equal(1, testItem.Quality);
+            Assert.Equal(_program.CalulatePrice(1), testItem.Price);
+        }
+
+        [Fact]
+        public void DobleQualityIncreaseTest()
+        {
+            //arrange
+            int sellIn = 0;
+            int quality = 10;
+            var testItem = new Item
+            {
+                Name = AGED_BRIE_NAME,
+                SellIn = sellIn,
+                Quality = quality
+            };
+
+            _program.Items = new List<Item>() { testItem };
+
+            //act
+            _program.UpdateQuality();
+
+            //assert
+            Assert.Equal(sellIn - 1, testItem.SellIn);
+            Assert.Equal(quality + 2, testItem.Quality);
+            Assert.Equal(_program.CalulatePrice(quality + 2), testItem.Price);
+        }
+
+        [Fact]
+        public void MaxQualityIncreaseTest()
+        {
+            //arrange
+            int sellIn = 10;
+            int quality = 50;
+            var testItem = new Item
+            {
+                Name = AGED_BRIE_NAME,
+                SellIn = sellIn,
+                Quality = quality
+            };
+
+            _program.Items = new List<Item>() { testItem };
+
+            //act
+            _program.UpdateQuality();
+
+            //assert
+            Assert.Equal(sellIn - 1, testItem.SellIn);
+            Assert.Equal(quality, testItem.Quality);
+            Assert.Equal(_program.CalulatePrice(quality), testItem.Price);
+        }
+    }
+}
