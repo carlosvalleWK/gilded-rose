@@ -1,80 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.Extensions.DependencyInjection;
+using GildedRose.Application.Features.Products;
+using GildedRose.Domain.Products;
+using GildedRose.Application.Contracts.Products;
 
 namespace GildedRose.Console
 {
     public class Program
     {
-        public IList<Item> Items;
+        public IEnumerable<Product>? Products;
+
         static void Main(string[] args)
         {
             System.Console.WriteLine("OMGHAI!");
 
             var app = new Program()
             {
-                Items = new List<Item>
+                Products = new List<Product>
                 {
-                    new Item {Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20},
-                    new Item {Name = "Aged Brie", SellIn = 2, Quality = 0},
-                    new Item {Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7}
+                    new Product { Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20 },
+                    new AgedBrieProduct { Name = "Aged Brie", SellIn = 2, Quality = 0 },
+                    new Product { Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7 }
                 }
             };
 
-            app.UpdateQuality();
+            for (int i = 0; i < 30; i++)
+            {
+                app.Products = app.SetProductsValues(app.Products);
+            }
 
             System.Console.ReadKey();
-
         }
 
-        public void UpdateQuality()
+        public IEnumerable<Product> SetProductsValues(IEnumerable<Product>? products)
         {
-            for (var i = 0; i < Items.Count; i++)
-            {
-                if (Items[i].Name != "Aged Brie")
-                {
-                    if (Items[i].Quality > 0)
-                    {
-                        Items[i].Quality = Items[i].Quality - 1;
-                    }
-                }
-                else
-                {
-                    if (Items[i].Quality < 50)
-                    {
-                        Items[i].Quality = Items[i].Quality + 1;
-                    }
-                }
-
-                Items[i].SellIn = Items[i].SellIn - 1;
-
-                if (Items[i].SellIn < 0)
-                {
-                    if (Items[i].Name != "Aged Brie")
-                    {
-
-                        if (Items[i].Quality > 0)
-                        {
-                            Items[i].Quality = Items[i].Quality - 1;
-                        }
-                    }
-                    else
-                    {
-                        if (Items[i].Quality < 50)
-                        {
-                            Items[i].Quality = Items[i].Quality + 1;
-                        }
-                    }
-                }
-                Items[i].Price = Math.Round(Items[i].Quality * 1.9M, 2);
-            }
+            IProductsManager productManager = GetProductsManager();
+            return productManager.SetValues(products!);
         }
-    }
 
-    public class Item
-    {
-        public string Name { get; set; }
-        public int SellIn { get; set; }
-        public int Quality { get; set; }
-        public decimal Price { get; set; }
+        private static IProductsManager GetProductsManager()
+        {
+            var serviceProvider = new ServiceCollection()
+                        .AddSingleton<IProductsManager, ProductsManager>()
+                        .BuildServiceProvider();
+
+            return serviceProvider.GetService<IProductsManager>()!;
+        }
     }
 }
