@@ -23,10 +23,7 @@ namespace GildedRose.Console
                 }
             };
 
-            for (int i = 0; i < 30; i++)
-            {
-                app.Products = app.SetProductsValues(app.Products);
-            }
+            app.Products = app.SetProductsValues(app.Products);
 
             System.Console.ReadKey();
         }
