@@ -1,7 +1,5 @@
 ﻿using GildedRose.Domain.Interfaces.Business;
 using GildedRose.Domain.Interfaces.Services;
-using Microsoft.Extensions.Logging;
-using System.Text.Json;
 
 namespace GildedRose.Batch.Services
 {
@@ -21,9 +19,6 @@ namespace GildedRose.Batch.Services
 
             var items = qualityGenerator.GenerateItems();
             qualityItems.UpdateQuality(items);
-
-            var jsonString = JsonSerializer.Serialize(items);
-            Console.WriteLine(jsonString);
 
             Console.ReadKey();
         }
