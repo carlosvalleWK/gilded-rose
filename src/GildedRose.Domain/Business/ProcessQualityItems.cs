@@ -12,8 +12,8 @@ namespace GildedRose.Domain.Business
 
         public ProcessQualityItems(IQualityItems qualityItems, DomainConfiguration configuration)
         {
-            this.qualityItems = qualityItems;
-            this.configuration = configuration;
+            this.qualityItems = qualityItems ?? throw new ArgumentNullException(nameof(qualityItems)); 
+            this.configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
         public void UpdateQuality(List<Item> items)

@@ -10,7 +10,7 @@ namespace GildedRose.Domain.Business
 
         public QualityItems(DomainConfiguration configuration)
         {
-            this.configuration = configuration;
+            this.configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
         public void CalculatePrice(Item item)
