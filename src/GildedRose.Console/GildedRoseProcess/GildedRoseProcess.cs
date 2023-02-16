@@ -9,6 +9,9 @@ namespace GildedRose.Console
     public class GildedRoseProcess : IGildedRoseProcess
     {
         private readonly IArticlesRepository _articlesRepository;
+        private const int MAX_QUALITY = 50;
+        private const int MIN_QUALITY = 0;
+        private const int EXPIRATION_NUMBER = 0;
 
         public GildedRoseProcess(IArticlesRepository articlesRepository)
         {
@@ -46,7 +49,7 @@ namespace GildedRose.Console
 
                     article.SellIn--;
 
-                    if (article.SellIn < 0)
+                    if (article.SellIn < EXPIRATION_NUMBER)
                     {
                         UpdateQuality(article);
                     }
@@ -68,14 +71,14 @@ namespace GildedRose.Console
             {
                 if (article.Name != "Aged Brie")
                 {
-                    if (article.Quality > 0)
+                    if (article.Quality > MIN_QUALITY)
                     {
                         article.Quality--;
                     }
                 }
                 else
                 {
-                    if (article.Quality < 50)
+                    if (article.Quality < MAX_QUALITY)
                     {
                         article.Quality++;
                     }
