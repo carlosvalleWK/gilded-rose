@@ -20,9 +20,16 @@ namespace GildedRose.Console
 
         public void RunGildedRoseProcess()
         {
-            System.Console.WriteLine("Gilded Rose process started");
-            var articles = GetAllArticles();
-            UpdateArticlesQuality(articles);
+            try
+            {
+                System.Console.WriteLine("Gilded Rose process started");
+                var articles = GetAllArticles();
+                UpdateArticlesQuality(articles);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private IEnumerable<Article> GetAllArticles()
