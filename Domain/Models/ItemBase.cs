@@ -10,8 +10,25 @@ namespace Domain.Models
     {
         public string Name { get; private set; }
         public int SellIn { get; private set; }
-        public int Quality { get; protected set; }
-        public decimal Price { get; protected set; }
+
+        private int _quality;
+        public int Quality
+        {
+            get
+            {
+                return _quality;
+            }
+            private set
+            {
+                if (value > 50)
+                    _quality = 50;
+                else if (value < 0)
+                    _quality = 0;
+                else
+                    _quality = value;
+            }
+        }
+        public decimal Price { get; private set; }
 
         public ItemBase(string name, int sellIn, int quality, decimal price)
         {
@@ -24,8 +41,8 @@ namespace Domain.Models
         public void Update()
         {
             SellIn -= 1;
-            EvaluateQuality();
-            EvaluatePrice();
+            this.Quality = EvaluateQuality();
+            this.Price = EvaluatePrice();
         }
 
         protected abstract int EvaluateQuality();

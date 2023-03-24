@@ -65,7 +65,7 @@ namespace Test.Model
         {
             public int EvaluateQualityOf(ItemBase item)
             {
-                return 20;
+                return item.Quality + 20;
             }
         }
 

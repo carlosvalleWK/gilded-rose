@@ -1,10 +1,4 @@
-﻿using Domain.Interfaces;
-using Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Models;
 
 namespace GildedRose.Console.QualityEvaluators
 {
@@ -12,12 +6,12 @@ namespace GildedRose.Console.QualityEvaluators
     {
         protected override int EvaluateAfterExpire(ItemBase item)
         {
-            throw new NotImplementedException();
+            return item.Quality - 2;
         }
 
         protected override int EvaluateBeforeExpire(ItemBase item)
         {
-            throw new NotImplementedException();
+            return item.Quality - 1;
         }
     }
 }

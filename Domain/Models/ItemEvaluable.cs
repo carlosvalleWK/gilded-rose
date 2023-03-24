@@ -1,31 +1,32 @@
 ﻿using Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Models
 {
     public class ItemEvaluable<TQualityEvaluator, TPriceEvaluator> : ItemBase
-        where TQualityEvaluator : class, IQualityEvaluator<ItemBase>
-        where TPriceEvaluator : class, IPriceEvaluator<ItemBase>
+        where TQualityEvaluator : class, IQualityEvaluator<ItemBase>, new()
+        where TPriceEvaluator : class, IPriceEvaluator<ItemBase>, new()
     {
         private readonly TQualityEvaluator _qualityEvaluator;
         private readonly TPriceEvaluator _priceEvaluator;
         public ItemEvaluable(string name, int sellIn, int quality, decimal price)
             : base(name, sellIn, quality, price)
         {
-            // TODO: Create evaluators using factory
+            _qualityEvaluator = new();
+            _priceEvaluator = new();
+        }
+
+        public ItemEvaluable(string name, int sellIn, int quality) : this(name, sellIn, quality, 0m)
+        {
+            // NOOP
         }
 
         protected override int EvaluateQuality()
         {
-            throw new NotImplementedException();
+            return _qualityEvaluator.EvaluateQualityOf(this);
         }
         protected override decimal EvaluatePrice()
         {
-            throw new NotImplementedException();
+            return _priceEvaluator.EvaluatePriceOf(this);
         }
     }
 }

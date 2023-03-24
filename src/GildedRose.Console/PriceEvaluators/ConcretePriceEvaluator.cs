@@ -8,7 +8,7 @@ namespace GildedRose.Console.PriceEvaluators
     {
         public decimal EvaluatePriceOf(ItemBase item)
         {
-            throw new NotImplementedException();
+            return Math.Round(item.Quality * 1.9M, 2);
         }
     }
 }

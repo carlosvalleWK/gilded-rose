@@ -11,12 +11,12 @@ namespace GildedRose.Console.QualityEvaluators
     {
         protected override int EvaluateAfterExpire(ItemBase item)
         {
-            throw new NotImplementedException();
+            return item.Quality + 2;
         }
 
         protected override int EvaluateBeforeExpire(ItemBase item)
         {
-            throw new NotImplementedException();
+            return item.Quality + 1;
         }
     }
 }
