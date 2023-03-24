@@ -9,12 +9,12 @@ namespace GildedRose.Console.QualityEvaluators
 {
     public class IncreaseQualityEvaluator : ExpirationQualityEvaluator<ItemBase>
     {
-        protected override decimal EvaluateAfterExpire(ItemBase item)
+        protected override int EvaluateAfterExpire(ItemBase item)
         {
             throw new NotImplementedException();
         }
 
-        protected override decimal EvaluateBeforeExpire(ItemBase item)
+        protected override int EvaluateBeforeExpire(ItemBase item)
         {
             throw new NotImplementedException();
         }

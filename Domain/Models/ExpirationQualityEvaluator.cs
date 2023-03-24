@@ -10,13 +10,13 @@ namespace Domain.Models
     public abstract class ExpirationQualityEvaluator<T> : IQualityEvaluator<T>
         where T : ItemBase
     {
-        public decimal EvaluateQualityOf(T item)
+        public int EvaluateQualityOf(T item)
         {
             return item.SellIn >= 0 ? EvaluateBeforeExpire(item) : EvaluateAfterExpire(item);
         }
 
-        protected abstract decimal EvaluateBeforeExpire(T item);
-        protected abstract decimal EvaluateAfterExpire(T item);
+        protected abstract int EvaluateBeforeExpire(T item);
+        protected abstract int EvaluateAfterExpire(T item);
 
     }
 }

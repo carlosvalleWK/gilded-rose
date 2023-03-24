@@ -13,7 +13,7 @@ namespace Domain.Models
     {
         private readonly TQualityEvaluator _qualityEvaluator;
         private readonly TPriceEvaluator _priceEvaluator;
-        protected ItemEvaluable(string name, int sellIn, int quality, decimal price)
+        public ItemEvaluable(string name, int sellIn, int quality, decimal price)
             : base(name, sellIn, quality, price)
         {
             // TODO: Create evaluators using factory
